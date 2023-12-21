@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <link rel="stylesheet" href="/stylesheets/stylefeed.css">
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="/javascripts/scriptfeed.js"></script>
+    <title>Document</title>
+</head>
+<body>
+<nav id="navbar">
+    <div class="navbar-inner">
+        <div class="navbar-left flexbox-left">
+            <!-- <div id="nav-button">
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+            </div> -->
+        </div>
+        <div class="navbar-center flexbox-left">
+            <svg xmlns="http://www.w3.org/2000/svg" id="Layer_1" data-name="Layer 1" viewBox="0 0 766.15 715.7">
+                <defs>
+                    <style>.cls-1{fill:var(--primary);}.cls-2{fill:var(--primary);}.cls-3{fill:var(--primary);}</style>
+                </defs>
+                <title>Icon</title>
+                <polygon class="cls-1" points="0 684.86 0 414.84 136.41 549.85 0 684.86"/>
+                <polygon class="cls-2" points="0 331.69 0 0 547.52 549.85 382.29 715.7 0 331.69"/>
+            </svg>
+        </div>
+        <div class="navbar-right flexbox-right">
+            <a class="profile-picture">
+                <svg id="Layer_1_1_" style="enable-background:new 0 0 16 16;" version="1.1"
+                        viewBox="0 0 16 16" xml:space="preserve" xmlns="http://www.w3.org/2000/svg"
+                        xmlns:xlink="http://www.w3.org/1999/xlink" class="w-11 hidden lg:block">
+                        <circle cx="8" cy="8" r="8" fill="#" />
+                        <text x="50%" y="50%" text-anchor="middle" dy=".3em" fill="white" font-size="8"
+                            class="font-extralight">
+                            <%= userInitials %>
+                        </text>
+                    </svg>
+            </a>
+        </div>
+    </div>
+</nav>
+
+<div id="dropdownmenu" class="flexbox-col">
+    <div class='menu-item'><a href="/profile"><i class='uil uil-user'></i>Profile</a></div>
+    <div class="menu-item"><a href="/logout"><i class="uil uil-arrow-right"></i> Logout</a></div>
+</div>
+
+
+<div class="container">
+<div class="box">
+    <% posts.forEach(function(post) { %>
+        <div class="post">
+            <img src="/images/uploads/<%= post.image %>" alt="<%= post.imageText %>">
+            <p><%= post.user.username %></p>
+        </div>
+    <% }); %>
+</div>
+</div>
+
+
+</div>
+
+</body>
+</html>

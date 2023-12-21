@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Document</title>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script src=" https://unicons.iconscout.com/release/v3.0.0/script/monochrome/bundle.js"></script>
+<script src="/javascripts/scriptprofile.js"></script>
+<script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+<link rel="stylesheet" href="/stylesheets/styleprofile.css">
+
+</head>
+<body>
+<nav id="navbar">
+    <div class="navbar-inner">
+        <div class="navbar-left flexbox-left">
+        </div>
+        <div class="navbar-center flexbox-left">
+            <svg href="/feed"xmlns="http://www.w3.org/2000/svg" id="Layer_1" data-name="Layer 1" viewBox="0 0 766.15 715.7">
+                <defs>
+                    <style>.cls-1{fill:var(--primary);}.cls-2{fill:var(--primary);}.cls-3{fill:var(--primary);}</style>
+                </defs>
+                <title>Icon</title>
+                <polygon class="cls-1" points="0 684.86 0 414.84 136.41 549.85 0 684.86"/>
+                <polygon class="cls-2" points="0 331.69 0 0 547.52 549.85 382.29 715.7 0 331.69"/>
+            </svg>
+        </div>
+        <div class="navbar-right flexbox-right">
+            <a class="profile-picture">
+                <svg id="Layer_1_1_" style="enable-background:new 0 0 16 16;" version="1.1"
+                viewBox="0 0 16 16" xml:space="preserve" xmlns="http://www.w3.org/2000/svg"
+                xmlns:xlink="http://www.w3.org/1999/xlink" class="w-11 hidden lg:block">
+                <circle cx="8" cy="8" r="8" fill="#" />
+                <text x="50%" y="50%" text-anchor="middle" dy=".3em" fill="white" font-size="8"
+                    class="font-extralight">
+                    <%= userInitials %>
+                </text>
+            </svg>
+            </a>
+        </div>
+    </div>
+</nav>
+<div id="dropdownmenu" class="flexbox-col">
+    <div class='menu-item'><a href="/feed"><i class='uil uil-user'></i> Feed</a></div>
+    <div id="switch" class="menu-item"><a><i class="uil uil-sunset"></i> Light Mode</a></div>
+    <div class="menu-item"><a href="/logout"><i class="uil uil-arrow-right"></i> Logout</a></div>
+</div>
+<main class="flexbox-col">
+
+    <div class="profile-header-wrapper flexbox">
+        <form class="profile-header flexbox" method="post" action="" enctype="multipart/form-data">
+            <div class="profile-header-img-wrapper">
+                <fieldset class="profile-pic-upload-input">
+                    <input type="file" name="image" id="choose-profile-header" accept="images">
+                </fieldset>
+                <a><img class="profile-header-img" alt="" src="https://i.imgur.com/KBWXjaR.jpg"></a>
+            </div>
+            <div class="profile-header-overlay"></div>
+            <img class="profile-header-img-back" alt="" src="https://i.imgur.com/KBWXjaR.jpg">
+        </form>
+    </div>
+
+    <div class="profile-top">
+        <div class="profile-left">
+            <form class="profile-pic-upload" method="post" action="/uploads" enctype="multipart/form-data">
+                <div class="profile-pic-wrapper">
+                    <fieldset class="profile-pic-upload-input">
+                    </fieldset>
+                    <a class="profile-pic">
+                        <svg id="Layer_1_1_" style="enable-background:new 0 0 16 16;" version="1.1"
+                        viewBox="0 0 16 16" xml:space="preserve" xmlns="http://www.w3.org/2000/svg"
+                        xmlns:xlink="http://www.w3.org/1999/xlink" class="w-11 hidden lg:block">
+                        <circle cx="8" cy="8" r="8" fill="#" />
+                        <text x="50%" y="50%" text-anchor="middle" dy=".3em" fill="white" font-size="8"
+                            class="font-extralight">
+                            <%= userInitials %>
+                        </text>
+                    </svg>
+                    </a>
+                </div>
+            </form>
+        </div>
+        <div class="profile-right flexbox-start-col">
+            <div class="profile-right-top">
+                <h3 class="profile-name"><%= user.username%></h3>
+            </div>
+            <div class="profile-right-bottom">
+                <div class="profile-bio-wrapper">
+                    <p class="profile-bio">
+                        Welcome to my profile ♡
+                        <br/>
+                        Follow me plz
+                        <br/>
+                        <br/>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="profile-page flexbox-col">
+        <div class="profile-page-nav flexbox">
+            <div class="profile-page-block">
+                <a href="/uploadpage"  id="show-posts"><i class="uil uil-chat"></i> Posts</a>
+            </div>
+        </div>
+        <div class="profile-page-inner">
+            <% user.posts.forEach(function(post){ %>
+                <div id="img1" class="image-wrapper flexbox">
+                    <div id="iov1" class="img-overlay-wrapper">
+                        <div class="img-btns">
+                            <p>465 <i class="uil uil-heart-alt"></i> &nbsp&nbsp 125 <i class="uil uil-comment"></i></p>
+                        </div>
+                        <div class="img-overlay"></div>
+                    </div>
+                    <img src=" /images/uploads/<%= post.image %>">
+                </div>
+            <% }) %>
+        </div>
+    </div>
+
+    <footer id="footer">
+        <svg class="footer-icon" xmlns="http://www.w3.org/2000/svg" id="Layer_1" data-name="Layer 1" viewBox="0 0 766.15 715.7">
+            <defs>
+                <style>.cls-1{fill:var(--primary);}.cls-2{fill:var(--primary);}.cls-3{fill:var(--primary);}</style>
+            </defs>
+            <title>Icon</title>
+            <polygon class="cls-1" points="0 684.86 0 414.84 136.41 549.85 0 684.86"/>
+            <polygon class="cls-2" points="0 331.69 0 0 547.52 549.85 382.29 715.7 0 331.69"/>
+        </svg>
+    </footer>
+</main>
+</body>
+</html>

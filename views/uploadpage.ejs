@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>
+        reconnect.
+</title>
+<script src="/javascripts/upload.js"></script>
+<link rel="stylesheet" href="/stylesheets/upload.css">
+<link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
+<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&libraries=places"></script>
+</head>
+
+<body>
+
+<div class="container">
+<img src="https://s22.postimg.cc/o9ocgxg01/uploadbox.png" class="center">
+<div class="centered">
+    <div id="information">
+        <div id="upload">
+        <p style="font-size:20px"> Upload a picture. <br>
+        We'll take care of the rest.</p>
+            <p>Please ensure that only your loved one is visible.</p>
+        </div>
+        <form class="posts-upload" method="post" action="/uploads" enctype="multipart/form-data">
+            <div class="posts-upload-wrapper">
+                <input type="text" name="pe" placeholder="some caption">
+                <input type="file" name="file" id="choose-profile-picture" accept="images">
+                <input type="submit">
+            </div>
+        </form>
+    </div>
+    </div>
+</body>
+</html>
