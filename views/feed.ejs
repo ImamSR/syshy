@@ -59,6 +59,7 @@
     <% posts.forEach(function(post) { %>
         <div class="post">
             <img src="/images/uploads/<%= post.image %>" alt="<%= post.imageText %>">
+            <img src="/public/tmp/<%= post.image %>" alt="<%= post.imageText %>">
             <p><%= post.user.username %></p>
         </div>
     <% }); %>
