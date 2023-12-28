@@ -4,7 +4,6 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const express = require('express');
 const bodyParser = require('body-parser');
-const path = require('path');
 const crypto = require('crypto');
 const mongoose = require('mongoose');
 const multer = require('multer');
@@ -26,9 +25,9 @@ app.set('view engine', 'ejs');
 
 app.use(flash());
 app.use(expressSession({
-  resave:false,
-  saveUninitialized:false,
-  secret:"hohoho"
+  resave: false,
+  saveUninitialized: false,
+  secret: "hohoho"
 }));
 app.use(passport.initialize());
 app.use(passport.session());
@@ -47,9 +46,6 @@ app.use('/users', usersRouter);
 
 app.use('/public', express.static(path.join(__dirname, 'public')));
 
-
-app.use(bodyParser.json());
-
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));
@@ -65,6 +61,5 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
-
 
 module.exports = app;
