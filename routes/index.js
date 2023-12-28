@@ -5,6 +5,7 @@ const userModel = require ("./users");
 const postModel = require ("./posts");
 const passport = require('passport');
 const uploads = require("./multer");
+const GridFsStorage = require('multer-gridfs-storage');
 
 const localStrategy  = require("passport-local");
 passport.use(new localStrategy(userModel.authenticate()));
@@ -64,7 +65,7 @@ res.render('uploadpage');
 
 
 
-router.post('/uploads', isLoggedIn ,uploads.single("file"),async function(req, res, next) {
+router.post('/uploads', isLoggedIn ,uploads.single('file'),async function(req, res, next) {
 if (!req.file){
 return res.status(404).send("No files were uploaded");
 }
@@ -78,6 +79,7 @@ user.posts.push(post._id);
 await user.save();
 res.redirect('/profile');
 });
+
 
 
 router.get('/profile', isLoggedIn, async function(req, res, next) {
@@ -103,9 +105,7 @@ router.get('/profile', isLoggedIn, async function(req, res, next) {
         }
       }
     ]);
-
     const userInitials = initialsData[0].initials;
-
     console.log(user);
     res.render('profile', { user, userInitials });
   } catch (error) {
@@ -113,6 +113,35 @@ router.get('/profile', isLoggedIn, async function(req, res, next) {
     res.status(500).send('Terjadi kesalahan saat mengambil data pengguna.');
   }
 });
+
+
+router.delete('/delete-post/:postId', isLoggedIn, async function(req, res) {
+  const postId = req.params.postId;
+
+  try {
+        // Find the post by ID and delete it from the database
+        const deletedPost = await postModel.findByIdAndDelete(postId);
+
+        if (!deletedPost) {
+            return res.status(404).send('Post not found.');
+        }
+
+        // Optionally, you may want to remove the post ID from the user's posts array
+        const user = await userModel.findOne({ username: req.session.passport.user });
+        const index = user.posts.indexOf(postId);
+        if (index !== -1) {
+            user.posts.splice(index, 1);
+            await user.save();
+        }
+      // Respond with success
+      res.status(200).send('Post deleted successfully.');
+  } catch (error) {
+      console.error(error);
+      res.status(500).send('Failed to delete post.');
+  }
+});
+
+
 
 
 

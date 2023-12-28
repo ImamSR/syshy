@@ -29,7 +29,6 @@ profilePicture.click(function() {
 });
 
 
-
 let profilePicWrapper = $(".profile-pic-wrapper");
 let profilePicNote = $(".profile-pic-note");
 profilePicWrapper.on({
@@ -168,4 +167,6 @@ else {
     $(".switch").addClass("switched");
     $("#switch a").html('<i class="uil uil-moonset"></i> Dark Mode');
 }
-});});
+});
+}
+);
