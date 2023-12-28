@@ -5,7 +5,7 @@ const userModel = require ("./users");
 const postModel = require ("./posts");
 const passport = require('passport');
 const uploads = require("./multer");
-const GridFsStorage = require('multer-gridfs-storage');
+
 
 const localStrategy  = require("passport-local");
 passport.use(new localStrategy(userModel.authenticate()));
@@ -65,19 +65,36 @@ res.render('uploadpage');
 
 
 
-router.post('/uploads', isLoggedIn ,uploads.single('file'),async function(req, res, next) {
-if (!req.file){
-return res.status(404).send("No files were uploaded");
-}
-const user = await userModel.findOne({username: req.session.passport.user});
-const post = await postModel.create({
-  image: req.file.filename,
-  imageText: req.body.pe,
-  user: user._id
-});
-user.posts.push(post._id);
-await user.save();
-res.redirect('/profile');
+router.post('/uploads', isLoggedIn, uploads.single('file'), async function (req, res, next) {
+  try {
+    // Check if a file was uploaded
+    if (!req.file) {
+      req.flash('error', 'No files were uploaded');
+      return res.redirect('/profile');
+    }
+
+    // Retrieve the user based on the session
+    const user = await userModel.findOne({ username: req.session.passport.user });
+
+    // Create a new post using postModel
+    const post = await postModel.create({
+      image: req.file.filename,
+      imageText: req.body.pe,
+      user: user._id
+    });
+
+    // Update the user's posts array
+    user.posts.push(post._id);
+    await user.save();
+
+    // Redirect to the user's profile page
+    req.flash('success_msg', 'File uploaded and post created successfully');
+    res.redirect('/profile');
+  } catch (error) {
+    console.error(error);
+    req.flash('error', 'Failed to upload file and create post');
+    res.redirect('/profile');
+  }
 });
 
 
