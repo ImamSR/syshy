@@ -136,8 +136,6 @@ app.post('/uploads', isLoggedIn, uploads.single('file'), async function (req, re
   }
 });
 
-
-
 module.exports = { uploads, clientPromise };
 module.exports = app;
 
